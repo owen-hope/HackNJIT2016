@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cardGame-NJIT</title>
+	<style>
+		h1, p, h2, h3{
+			color: crimson;
+		}
+
+		body{
+			background-color: darkblue;
+		}
+		h2{
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+
+<center>
+	<h1>Welcome to our game!!</h1>
+
+
+	<p  id="welcomepage" style="font-size: large">This is a cards against humanity type game play except online and
+	without the hassle of cleaning everything up at the end of the night!</p>
+</center>
+
+<h2>Enjoy the game!</h2>
+
+
+
+<!--<center>
+    <form>
+        <input type="button" value="Join a game and kick some ass!"
+        onclick="window.location.href='joinGame.html'">
+    </form>
+</center>
+-->
+
+<center>
+<!---This button is to create game--->
+<button id="cGame" onclick="createGame()">Create a Game</button>
+<!---This button is to play game--->
+<button id="pGame" onclick="playGame()">Play Game</button>
+<button id="resetGame" onclick="reset()">Reset</button>
+</center>
+
+
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+<script type="text/javascript" src="reset.js"></script>
+<script type="text/javascript" src="distributeWhites.js"></script>
+<script type="text/javascript" src="playgame.js"></script>
+<script type="text/javascript" src="creategame.js"></script>
+<script type="text/javascript" src="clearPage.js"></script>
+
+
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDABVrB0WdN0741E7lj3QOt0LzwSCfT39w",
+    authDomain: "cardsagainstfirebase.firebaseapp.com",
+    databaseURL: "https://cardsagainstfirebase.firebaseio.com",
+    storageBucket: "cardsagainstfirebase.appspot.com",
+    messagingSenderId: "508061594480"
+  };
+  firebase.initializeApp(config);
+	
+	
+
+
+	  var whitedisplay = document.getElementById('whiteOut');
+	  var blackOut = document.getElementById('blackOut');
+	  
+	  var whitecards_array = new Array(52);
+	  var whiteCardsRef = firebase.database().ref("Game001/white_cards");
+	  
+	  var blackcards_array = new Array(12);
+	  var db2Ref = firebase.database().ref("Game001/black_cards");
+		
+	  var whiteBoobs_array = new Array(52);
+	  var blackBooks_array = new Array(12);
+	  
+
+	  	
+		//white cards
+		whiteCardsRef.on('value', function(snap){
+		var set2 = snap.val();
+		for(var j = 0 ;j < set2.length;j++)
+		{
+			whitecards_array[j] = set2[j].value;
+			whiteBoobs_array[j] = false;
+			//whitedisplay.innerText = whitecards_array[9]; //displaying the card value
+			//console.log(whitecards_array[9]);
+		}
+	  });
+		
+		
+	  
+		//black cards
+		db2Ref.on('value', function(snap){
+		var set = snap.val();
+		for(var i = 0;i < set.length;i++)
+		{
+		blackcards_array[i] = set[i].value;
+		blackBooks_array[i] = false;
+		//blackOut.innerText = blackcards_array[7]; //displaying the card value
+		}
+	  });
+	
+	</script>
+	<center>
+	<h3 hidden id="pNameHeader">Player Names :</h3>
+	<table  hidden id="PlayerNames" style="width:100%" cellspacing="10px" cellpadding="10px">
+	<tr>
+		<th bgcolor= "#3AFF00" id="p1"></th>
+	</tr>
+	<tr>
+		<th bgcolor="#FCE40F" id="p2"></th>
+	</tr>
+	<tr>
+		<th bgcolor="#19FFE6" id="p3"></th>
+	</tr>
+	<tr>
+		<th bgcolor="#DC0C9A" id="p4"></th>
+	</tr>
+
+</table></center>
+<center id="namesOfPlayers">
+	<h3 id="playerNameInput" hidden="">Enter player names</h3>
+	<form><input hidden id="frm1" type = "text" name="userName1" placeholder="Player1"></form>
+	<form ><input hidden id="frm2" type = "text" name="userName2" placeholder="Player2"></form>
+	<form ><input hidden id="frm3" type = "text" name="userName3" placeholder="Player3"></form>
+	<form ><input hidden id="frm4" type = "text" name="userName4" placeholder="Player4"></form>
+</center>
+
+</body>
+</html>

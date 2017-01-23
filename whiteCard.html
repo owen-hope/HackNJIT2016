@@ -1,0 +1,55 @@
+<style>
+    .whiteCard {
+        background-color: gray;
+        color: gold;
+        width: 240px;
+        height: 336px;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 23px;
+        border-radius: 10px;
+    }
+
+    .inner {
+        padding: 25px 20px;
+    }
+
+    .button {
+        position: relative;
+        left: 30%;
+        margin-top: 80%;
+        font-size: x-large;
+        background-color: gold;
+    }
+
+</style>
+
+
+
+<!DOCTYPE html>
+<script>
+var whiteCardsRef = firebase.database().ref("white_cards");
+</script>
+<html lang="en">
+
+<div class="whiteCard">
+    <div class="inner">
+        jack smells
+    </div>
+    <input type="button" class="button" value="submit">
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>whiteCard</title>
+</head>
+<body>
+
+<table class="whiteCard">
+
+
+
+</table>
+
+</body>
+</html>
